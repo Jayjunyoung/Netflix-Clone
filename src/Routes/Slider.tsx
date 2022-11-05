@@ -57,7 +57,7 @@ const Arrow = styled.svg`
     left: 120px;
     width: 30px;
     height: 30px;
-    margin-left: 10px;
+    margin-left: 50px;
     cursor: pointer;
     path {
         fill: white;//svg로고에 하얀색으로 색상 변경
@@ -129,7 +129,7 @@ const infoVariants = {
 
 interface SliderProps {
     data?: IGetMoviesResult | ITvShowResult;//result[]
-    title?: string,
+    title?: string;
 }
 
 function Slider({data, title}: SliderProps) {//구조분해 할당기법
@@ -164,9 +164,9 @@ function Slider({data, title}: SliderProps) {//구조분해 할당기법
             toggleLeaving();//leaving이 true가 될것 , exit이 끝나면 false가됌
             const totalMovies = data.results.length - 1;
             //배너에 있는 첫번째 영화 제외하면 슬라이더에들어가는 영화는 18개
-            const maxIndex = Math.floor(totalMovies / offset) - 1;
+            const minIndex = Math.floor(totalMovies / offset) - 3;
             //page는 0부터 시작하므로 -1해주기
-            setCurrentIndex((prev) => (prev === 0 ? maxIndex : prev - 1));
+            setCurrentIndex((prev) => (prev === minIndex ? 2 : prev - 1));
         }
     };
 
@@ -198,7 +198,7 @@ function Slider({data, title}: SliderProps) {//구조분해 할당기법
                 </Arrow>
                 <Arrow 
                 style={{
-                    marginLeft:"50px",
+                    marginLeft:"90px",
                 }}
                 xmlns="http://www.w3.org/2000/svg" 
                 viewBox="0 0 448 512"
@@ -225,7 +225,7 @@ function Slider({data, title}: SliderProps) {//구조분해 할당기법
                     .slice(offset * currentIndex, offset * currentIndex + offset)
                     .map((movie) => (//data쓸 필요없고 새로운 인자로 고고
                     <Box
-                        layoutId={movie.id + movie.title}//layoutId : string임
+                        layoutId={movie.id + title!}//layoutId : string임
                         key={movie.id}
                         whileHover="hover"
                         initial="normal"

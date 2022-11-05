@@ -256,8 +256,8 @@ function Tv() {//useQuery의 결과가 아이겟무비스리졸트를따를것
             <Title>{popular?.results[0].name}</Title>
             <Overview>{popular?.results[0].overview}</Overview>
         </Banner>
-        {popular && <Slider data={popular} title="popular" />}
-        {topRated && <Slider data={topRated} title="topRated" />}
+        {popular && <Slider data={popular} title="유명한 Tv Show" />}
+        {topRated && <Slider data={topRated} title="평점 높은 Tv Show" />}
 
         <AnimatePresence>
         {bigTvMatch ? (//영화를 클릭했을때만 나타남

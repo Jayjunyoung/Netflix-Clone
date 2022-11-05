@@ -157,13 +157,13 @@ function Home() {//useQuery의 결과가 아이겟무비스리졸트를따를것
 
     //api받아오는 로직
     const { data, isLoading } = useQuery<IGetMoviesResult>(
-        ["movies", "nowPlaying"],
+        ["nowPlaying"],
         getMovies,
     );
     console.log(data);//data detail popular 셋다 객체로 나옴
 
     const {data: detail, isLoading: DetailLoading} = useQuery<IGetDetail>(
-        ["movies", "detail", `${movieId}`],
+        ["detail", `${movieId}`],
         () => 
         getDetail(bigMovieMatch?.params.movieId!),
         { enabled: bigMovieMatch?.params.movieId !== undefined }
@@ -172,14 +172,14 @@ function Home() {//useQuery의 결과가 아이겟무비스리졸트를따를것
 
     //popular 영화
     const { data: popular, isLoading: getLoading} = useQuery<IGetMoviesResult>(
-        ["movies", "popular"],
+        ["popular"],
         getPopular,
     );
     console.log(popular);
 
     
     const { data: topRated, isLoading: getLoading2} = useQuery<IGetMoviesResult>(
-        ["movies", "top"],
+        ["top"],
         getTop,
     );
 
@@ -224,9 +224,9 @@ function Home() {//useQuery의 결과가 아이겟무비스리졸트를따를것
             <Title>{data?.results[0].title}</Title>
             <Overview>{data?.results[0].overview}</Overview>
         </Banner>
-        {data && <Slider data={data} title="now playing" />}
-        {popular && <Slider data={popular} title="popular" />}
-        {topRated && <Slider data={topRated} title="topRated" />}
+        {data && <Slider data={data} title="상영중인 영화" />}
+        {popular && <Slider data={popular} title="유명한 영화" />}
+        {topRated && <Slider data={topRated} title="평점 높은 영화" />}
 
         <AnimatePresence>
             {bigMovieMatch ? (//영화를 클릭했을때만 나타남
