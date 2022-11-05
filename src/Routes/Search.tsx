@@ -1,6 +1,6 @@
 import { useQuery } from 'react-query';
 import { useLocation } from "react-router"
-import { IGetMoviesResult , getSearchMovies, IGetSearchResult} from '../api';
+import { IGetMoviesResult , getSearchMovies, IGetSearchResult , getSearchTv} from '../api';
 import styled from "styled-components";
 import MovieResult from "../Search/MovieResult"
 import TvResult from '../Search/TvResult';
@@ -34,7 +34,16 @@ function Search() {
         }
     ); 
     console.log(movieResults);
-    
+
+
+    const { data: TvResults, isLoading : TvLoading } = useQuery(
+        [`${keyword}`, "searchTv"],
+        () => {
+            return getSearchTv(keyword || "");
+        }
+    );
+    console.log(TvResults);
+
     return (
         <Wrapper>
         {isLoading ? (
@@ -42,6 +51,7 @@ function Search() {
         ) : (
             <>
                 <MovieResult search={keyword || ""}/>
+                <TvResult search={keyword || "" }/>
             </>
         )
         }

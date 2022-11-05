@@ -51,7 +51,7 @@ export interface IGetMoviesResult {//Api값들 타입지정(개발자도구)
 
 
 //검색 타입이랑 에이피아이
-interface Isearch {
+interface IMoviesearch {
     backdrop_path: string;
     poster_path:string;
     title:string;
@@ -65,10 +65,32 @@ interface Isearch {
 
 export interface IGetSearchResult {
     page: number,
-    results: Isearch[],
+    results: IMoviesearch[],
     total_pages: number,
     total_results: number,
 }
+
+//검색 한 TV 보여주는 api
+interface ITvSearch {
+    backdrop_path: string;
+    poster_path:string;
+    name:string;
+    overview:String;
+    id:number;
+    first_air_date:string;
+    vote_average:number;
+    original_title:string;
+}
+
+
+
+export interface IGetTvSearchResult {
+    page: number,
+    results: ITvSearch[],
+    total_pages: number,
+    total_results: number,
+}
+
 
 
 //API 가져오는 코드들
@@ -120,10 +142,16 @@ export function getTopTvShow() {
 
 
 
-//영화검색 api
+//영화검색과 Tv검색 api
 
 export function getSearchMovies(keyword: string) {
     return fetch(`${BASE_PATH}/search/movie?api_key=${API_KEY}&query=${keyword}`).then(
+        (response) => response.json()
+    );
+}
+
+export function getSearchTv(keyword: string) {
+    return fetch(`${BASE_PATH}/search/tv?api_key=${API_KEY}&query=${keyword}`).then(
         (response) => response.json()
     );
 }
