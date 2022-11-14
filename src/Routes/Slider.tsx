@@ -57,7 +57,7 @@ const Arrow = styled.svg`
     left: 120px;
     width: 30px;
     height: 30px;
-    margin-left: 50px;
+    margin-left: 60px;
     cursor: pointer;
     path {
         fill: white;//svg로고에 하얀색으로 색상 변경
@@ -148,6 +148,7 @@ function Slider({data, title}: SliderProps) {//구조분해 할당기법
     console.log(back);
 
     const history = useHistory();//현재 URL을 가져옴
+    console.log(history);
 
     const toggleLeaving = () => setLeaving((prev) => !prev);
     const onBoxClicked = (movieId: string) => {
@@ -226,11 +227,11 @@ function Slider({data, title}: SliderProps) {//구조분해 할당기법
                     .map((movie) => (//data쓸 필요없고 새로운 인자로 고고
                     <Box
                         layoutId={movie.id + title!}//layoutId : string임
-                        key={movie.id}
+                        key={movie.id + title!}
                         whileHover="hover"
                         initial="normal"
                         variants={boxVariants}
-                        onClick={() => onBoxClicked(movie.id+"")}
+                        onClick={() => onBoxClicked(movie.id + title!)}
                         transition={{ type: "tween" }}
                         bgphoto={makeImagePath(movie.backdrop_path, "w500")}
                     >
