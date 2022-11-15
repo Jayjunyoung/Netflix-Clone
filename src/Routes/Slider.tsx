@@ -151,8 +151,13 @@ function Slider({data, title}: SliderProps) {//구조분해 할당기법
     console.log(history);
 
     const toggleLeaving = () => setLeaving((prev) => !prev);
-    const onBoxClicked = (movieId: string) => {
-        history.push(`/movies/${movieId}`);//url에 영화아이디넘겨
+    const onBoxClicked = (contentId: string) => {
+        if(history.location.pathname === "/") {//기존 home화면
+            history.push(`/movies/${contentId}`);//url에 영화아이디넘겨
+        }    
+        else if(history.location.pathname === `/tv`) {
+            history.push(`/tv/${contentId}`);//url에 영화아이디넘겨
+        }
     };
 
 
@@ -224,19 +229,19 @@ function Slider({data, title}: SliderProps) {//구조분해 할당기법
                 {data?.results
                     .slice(1)//이미사용한영화제외, index: page수
                     .slice(offset * currentIndex, offset * currentIndex + offset)
-                    .map((movie) => (//data쓸 필요없고 새로운 인자로 고고
+                    .map((content) => (//data쓸 필요없고 새로운 인자로 고고
                     <Box
-                        layoutId={movie.id + title!}//layoutId : string임
-                        key={movie.id + title!}
+                        layoutId={content.id + title!}//layoutId : string임
+                        key={content.id + title!}
                         whileHover="hover"
                         initial="normal"
                         variants={boxVariants}
-                        onClick={() => onBoxClicked(movie.id + title!)}
+                        onClick={() => onBoxClicked(content.id + "")}
                         transition={{ type: "tween" }}
-                        bgphoto={makeImagePath(movie.backdrop_path, "w500")}
+                        bgphoto={makeImagePath(content.backdrop_path, "w500")}
                     >
                         <Info variants={infoVariants}>
-                            <h4>{movie.title}</h4>
+                            <h4>{content.title}</h4>
                         </Info>
                     </Box>
                 ))}

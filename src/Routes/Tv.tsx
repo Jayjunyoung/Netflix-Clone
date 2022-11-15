@@ -158,43 +158,6 @@ const BigRate = styled.span`
 `;
 
 
-const rowVariants = {
-    hidden: {
-        x: window.outerWidth + 5,//브라우저 전체의넓이
-    },
-    visible: {
-        x: 0,
-    },
-    exit: {
-        x: -window.outerWidth - 5,
-    },
-};
-
-const boxVariants = {
-    normal: {
-        scale: 1,
-    },
-    hover: {//커서가 있을때
-        scale: 1.3,
-        y: -80,
-    transition: {
-        delay: 0.5,//영화들의 애니메이션에 딜레이를 줘서 서로겹치지않게
-        duaration: 0.1,
-        type: "tween",
-        },
-    },
-};
-
-const infoVariants = {
-    hover: {
-        opacity: 1,
-    transition: {
-            delay: 0.5,
-            duaration: 0.1,
-            type: "tween",
-        },
-    },
-};
 
 interface Params {
     tvShowId: string;
@@ -214,35 +177,33 @@ function Tv() {//useQuery의 결과가 아이겟무비스리졸트를따를것
     const { scrollY } = useViewportScroll();
 
     //api받아오는 로직
-    const { data: popular, isLoading: popularLoading } = useQuery<ITvShowResult>(
+    const { data: popularTv, isLoading: popularLoading } = useQuery<ITvShowResult>(
         ["popular"],
         getTvShow,
     );
-    console.log(popular);
-    console.log(popular?.results.length);//20개임
+    console.log(popularTv);
+    console.log(popularTv?.results.length);//20개임
 
 
-    const {data: topRated, isLoading: topLoading} = useQuery<ITvShowResult>(
+    const {data: topRatedTv, isLoading: topLoading} = useQuery<ITvShowResult>(
         ["topRated"],
         getTopTvShow,
     );
-    console.log(topRated);
+    console.log(topRatedTv);
     
     
-    const onBoxClicked = (tvShowId: string) => {
-        history.push(`/tv/${tvShowId}`);//url에 영화아이디넘겨
-    };
+    
     const onOverlayClick = () => history.push("/tv");//원래상태로돌아감:오버레이누르면
 
-    const popularTv = 
+    const popularTvCheck = 
         bigTvMatch?.params.tvShowId &&//라우트매치 되는지 확인하기
-        popular?.results.find((tv) => tv.id + "" === bigTvMatch?.params.tvShowId);
-    console.log(popularTv);
+        popularTv?.results.find((tv) => tv.id + "" === bigTvMatch?.params.tvShowId);
+    console.log(popularTvCheck);
 
-    const topTv =
+    const topTvCheck =
         bigTvMatch?.params.tvShowId &&//라우트매치 되는지 확인하기
-        topRated?.results.find((tv) => tv.id + "" === bigTvMatch?.params.tvShowId);
-    console.log(topTv);
+        topRatedTv?.results.find((tv) => tv.id + "" === bigTvMatch?.params.tvShowId);
+    console.log(topTvCheck);
 
     return  (
         <Wrapper>
@@ -251,13 +212,13 @@ function Tv() {//useQuery의 결과가 아이겟무비스리졸트를따를것
     ) : (
         <>
         <Banner
-            bgphoto={makeImagePath(popular?.results[0].backdrop_path || "")}
+            bgphoto={makeImagePath(popularTv?.results[0].backdrop_path || "")}
         >
-            <Title>{popular?.results[0].name}</Title>
-            <Overview>{popular?.results[0].overview}</Overview>
+            <Title>{popularTv?.results[0].name}</Title>
+            <Overview>{popularTv?.results[0].overview}</Overview>
         </Banner>
-        {popular && <Slider data={popular} title="유명한 Tv Show" />}
-        {topRated && <Slider data={topRated} title="평점 높은 Tv Show" />}
+        {popularTv && <Slider data={popularTv} title="유명한 Tv Show" />}
+        {topRatedTv && <Slider data={topRatedTv} title="평점 높은 Tv Show" />}
 
         <AnimatePresence>
         {bigTvMatch ? (//영화를 클릭했을때만 나타남
@@ -271,50 +232,50 @@ function Tv() {//useQuery의 결과가 아이겟무비스리졸트를따를것
                     style={{ top: scrollY.get() + 100 }}//어디서든 영화를 눌러도 가운데에 나옴
                     layoutId={bigTvMatch.params.tvShowId}
                 >
-                    {popularTv && (
+                    {popularTvCheck && (
                     <>
                         <BigCover
                             style={{
                                 backgroundImage: `linear-gradient(to top, black, transparent), url(${makeImagePath(
-                                popularTv.backdrop_path,
+                                popularTvCheck.backdrop_path,
                                 "w500"
                             )})`,
                         }}
                         />
-                        <BigTitle>{popularTv.name}</BigTitle>
+                        <BigTitle>{popularTvCheck.name}</BigTitle>
                         <BigTime>
                             
                         </BigTime>
                         <BigDate>
-                            상영일: {popularTv.first_air_date}
+                            상영일: {popularTvCheck.first_air_date}
                             <BigRate>
-                                Rated: {popularTv.vote_average}점
+                                Rated: {popularTvCheck.vote_average}점
                             </BigRate>
                         </BigDate>
-                        <BigOverview>{popularTv.overview}</BigOverview>
+                        <BigOverview>{popularTvCheck.overview}</BigOverview>
                     </>
                     )}
-                    {topTv && (
+                    {topTvCheck && (
                     <>
                         <BigCover
                             style={{
                                 backgroundImage: `linear-gradient(to top, black, transparent), url(${makeImagePath(
-                                topTv.backdrop_path,
+                                topTvCheck.backdrop_path,
                                 "w500"
                             )})`,
                         }}
                         />
-                        <BigTitle>{topTv.name}</BigTitle>
+                        <BigTitle>{topTvCheck.name}</BigTitle>
                         <BigTime>
                             
                         </BigTime>
                         <BigDate>
-                            상영일: {topTv.first_air_date}
+                            상영일: {topTvCheck.first_air_date}
                             <BigRate>
-                                Rated: {topTv.vote_average}점
+                                Rated: {topTvCheck.vote_average}점
                             </BigRate>
                         </BigDate>
-                        <BigOverview>{topTv.overview}</BigOverview>
+                        <BigOverview>{topTvCheck.overview}</BigOverview>
                     </>
                     )}
                 </BigTv>
