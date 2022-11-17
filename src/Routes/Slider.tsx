@@ -152,7 +152,7 @@ function Slider({data, title}: SliderProps) {//구조분해 할당기법
 
     const toggleLeaving = () => setLeaving((prev) => !prev);
     const onBoxClicked = (contentId: string) => {
-        if(history.location.pathname === "/") {//기존 home화면
+        if(history.location.pathname === "/Netflix-clone") {//기존 home화면
             history.push(`/movies/${contentId}`);//url에 영화아이디넘겨
         }    
         else if(history.location.pathname === `/tv`) {

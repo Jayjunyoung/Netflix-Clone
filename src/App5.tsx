@@ -16,7 +16,7 @@ function App5() {//null: 아무것도선택X string: "1" ~ "4"
                 <Route path="/search">
                     <Search />
                 </Route>
-                <Route path={["/movies/:movieId", "/"]}>
+                <Route path={["/movies/:movieId", "/Netflix-clone"]}>
                     <Home />
                 </Route>
             </Switch>

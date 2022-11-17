@@ -185,7 +185,7 @@ function Home() {//useQuery의 결과가 아이겟무비스리졸트를따를것
 
 
     
-    const onOverlayClick = () => history.push("/");//원래상태로돌아감:오버레이누르면
+    const onOverlayClick = () => history.push("/Netflix-clone");//원래상태로돌아감:오버레이누르면
 
 
 

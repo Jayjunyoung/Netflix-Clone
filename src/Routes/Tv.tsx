@@ -135,8 +135,9 @@ const BigOverview = styled.p`
 `;
 
 const BigDate = styled.h4`
-    font-size: 30px;
-    padding: 30px;
+    text-align: center;
+    font-size: 15px;
+    padding: 15px;
     top: -80px;
     position: relative;
     color: ${(props) => props.theme.white.lighter};
@@ -148,6 +149,9 @@ const BigTime = styled.h5`
     top: -80px;
     position: relative;
     color: ${(props) => props.theme.white.lighter};
+    span {
+        font-weight: bold;
+    }
 `;
 
 
@@ -243,9 +247,6 @@ function Tv() {//useQuery의 결과가 아이겟무비스리졸트를따를것
                         }}
                         />
                         <BigTitle>{popularTvCheck.name}</BigTitle>
-                        <BigTime>
-                            
-                        </BigTime>
                         <BigDate>
                             상영일: {popularTvCheck.first_air_date}
                             <BigRate>
@@ -266,9 +267,6 @@ function Tv() {//useQuery의 결과가 아이겟무비스리졸트를따를것
                         }}
                         />
                         <BigTitle>{topTvCheck.name}</BigTitle>
-                        <BigTime>
-                            
-                        </BigTime>
                         <BigDate>
                             상영일: {topTvCheck.first_air_date}
                             <BigRate>

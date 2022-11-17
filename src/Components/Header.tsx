@@ -118,7 +118,7 @@ interface IForm {//폼에 사용할 인터페이스
 
 function Header() {
     const [searchOpen, setSearchOpen] = useState(false);
-    const homeMatch = useRouteMatch("/");//현재 지정된 유알엘에 있는걸 알려주는!
+    const homeMatch = useRouteMatch("/Netflix-clone");//현재 지정된 유알엘에 있는걸 알려주는!
     const tvMatch = useRouteMatch("/tv");
     const inputAnimation = useAnimation();//이번에 새로 배운것
     const navAnimation = useAnimation();
@@ -127,7 +127,7 @@ function Header() {
     const history = useHistory();
     console.log(history);
     const onClick = () => {
-        history.push("/");
+        history.push("/Netflix-clone");
     }
     
     const toggleSearch = () => {
@@ -175,7 +175,7 @@ function Header() {
             </Logo>
             <Items>
                 <Item>
-                    <Link to="/">
+                    <Link to="/Netflix-clone">
                         Home {homeMatch?.isExact && <Circle layoutId="circle" />}
                     </Link>
                 </Item>
