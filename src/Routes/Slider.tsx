@@ -238,7 +238,7 @@ function Slider({data, title}: SliderProps) {//구조분해 할당기법
                         variants={boxVariants}
                         onClick={() => onBoxClicked(content.id + "")}
                         transition={{ type: "tween" }}
-                        bgphoto={makeImagePath(content.backdrop_path, "w500")}
+                        bgphoto={makeImagePath(content.backdrop_path || content.poster_path, "w500")}
                     >
                         <Info variants={infoVariants}>
                             <h4>{history.location.pathname}</h4>

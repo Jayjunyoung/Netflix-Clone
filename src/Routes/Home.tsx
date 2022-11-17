@@ -176,7 +176,6 @@ function Home() {//useQuery의 결과가 아이겟무비스리졸트를따를것
         getPopular,
     );
     console.log(popular);
-
     
     const { data: topRated, isLoading: getLoading2} = useQuery<IGetMoviesResult>(
         ["top"],
