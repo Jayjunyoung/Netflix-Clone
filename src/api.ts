@@ -3,15 +3,14 @@ const API_KEY = "10923b261ba94d897ac6b81148314a3f";
 const BASE_PATH = "https://api.themoviedb.org/3";
 
 
-interface ITvShow {
+export interface ITvShow {
     backdrop_path: string;
     poster_path:string;
     id:number;
     overview:string;
     name: string;
     vote_average:number;
-    first_air_date:string;
-    title: string; //tv에서도 title 이용할려면 
+    first_air_date:string; //tv에서도 title 이용할려면 
     //타입스크립트로 정의를 해준것
 }
 
@@ -24,10 +23,10 @@ export interface ITvShowResult {
 }
 
 
+// 영화 api
 
 
-
-interface IMovie {
+export interface IMovie {
     backdrop_path: string;
     poster_path:string;
     title:string;
@@ -44,7 +43,7 @@ export interface IGetMoviesResult {//Api값들 타입지정(개발자도구)
         minimum:"string";
     };
     page: number,
-    results: IMovie[],//IMovie의 객체가될것
+    results: IMovie[],
     total_pages: number,
     total_results: number,
 }

@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { motion, AnimatePresence, useViewportScroll } from "framer-motion";
 import { useState} from "react";
 import { useHistory, useRouteMatch , useParams} from "react-router-dom";
-import { getDetail, getMovies, getPopular, getTop, IGetDetail, IGetMoviesResult,ITvShowResult } from "../api";
+import { IGetMoviesResult,ITvShowResult , IMovie, ITvShow} from "../api";
 import { makeImagePath } from '../utils';
 
 
@@ -128,7 +128,7 @@ const infoVariants = {
 
 
 interface SliderProps {
-    data?: IGetMoviesResult | ITvShowResult;//result[]
+    data: IGetMoviesResult | ITvShowResult;//result[]
     title?: string;
 }
 
@@ -241,7 +241,7 @@ function Slider({data, title}: SliderProps) {//구조분해 할당기법
                         bgphoto={makeImagePath(content.backdrop_path, "w500")}
                     >
                         <Info variants={infoVariants}>
-                            <h4>{content.title}</h4>
+                            <h4>{history.location.pathname}</h4>
                         </Info>
                     </Box>
                 ))}
