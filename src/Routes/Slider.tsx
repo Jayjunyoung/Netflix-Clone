@@ -105,6 +105,7 @@ const boxVariants = {
     hover: {//커서가 있을때
         scale: 1.3,
         y: -80,
+        zIndex: 99,//Box에 커서올리면 애니메이션된 박스가 나머지박스위로 나오게
     transition: {
         delay: 0.5,//영화들의 애니메이션에 딜레이를 줘서 서로겹치지않게
         duaration: 0.1,
@@ -127,8 +128,8 @@ const infoVariants = {
 };
 
 
-interface SliderProps {
-    data: IGetMoviesResult | ITvShowResult;//result[]
+interface SliderProps { // | : union 방식
+    data?: IGetMoviesResult | ITvShowResult;//result[]
     title?: string;
 }
 
@@ -241,8 +242,8 @@ function Slider({data, title}: SliderProps) {//구조분해 할당기법
                         bgphoto={makeImagePath(content.backdrop_path || content.poster_path, "w500")}
                     >
                         <Info variants={infoVariants}>
-                            <h4>{history.location.pathname}</h4>
-                        </Info>
+                            <h4>{'title' in content ? content.title : content.name}</h4>
+                        </Info> {/* in연산자 활용해 content객체에 title이 존재하는지 확인 */}
                     </Box>
                 ))}
             </Row>

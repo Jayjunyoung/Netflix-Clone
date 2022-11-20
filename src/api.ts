@@ -8,10 +8,9 @@ export interface ITvShow {
     poster_path:string;
     id:number;
     overview:string;
-    name: string;
+    name:string;
     vote_average:number;
-    first_air_date:string; //tv에서도 title 이용할려면 
-    //타입스크립트로 정의를 해준것
+    first_air_date:string; 
 }
 
 

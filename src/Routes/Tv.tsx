@@ -241,7 +241,7 @@ function Tv() {//useQuery의 결과가 아이겟무비스리졸트를따를것
                         <BigCover
                             style={{
                                 backgroundImage: `linear-gradient(to top, black, transparent), url(${makeImagePath(
-                                popularTvCheck.backdrop_path,
+                                popularTvCheck.backdrop_path || popularTvCheck.poster_path,
                                 "w500"
                             )})`,
                         }}
@@ -261,7 +261,7 @@ function Tv() {//useQuery의 결과가 아이겟무비스리졸트를따를것
                         <BigCover
                             style={{
                                 backgroundImage: `linear-gradient(to top, black, transparent), url(${makeImagePath(
-                                topTvCheck.backdrop_path,
+                                topTvCheck.backdrop_path || topTvCheck.poster_path,
                                 "w500"
                             )})`,
                         }}
